@@ -1,0 +1,17 @@
+on:
+    pull_request_target:
+     branches: [ main ]
+     types: [opened, labeled, unlabeled, synchronize]
+
+jobs:
+  check_pr_labels:
+    runs-on: ubuntu-latest
+    name: Check PR has valid labels
+    steps:
+    - name: Check PR has valid labels
+      id: check-pr-labels
+      uses: amine-arb-2019/check-pr-label@v1
+      with:
+        github-token: "${{ secrets.GITHUB_TOKEN }}"
+        valid-labels: 'Label'
+        pull-request-number: '${{ github.event.pull_request.number }}'
